@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Greenhouse application review helper
 // @namespace    https://canonical.com/
-// @version      0.1.0
+// @version      0.1.1
 // @description  Add's hints to application custom question answers
 // @author       Anthony Dillon
 // @icon         https://icons.duckduckgo.com/ip3/greenhouse.io.ico
@@ -117,7 +117,7 @@
   }
 
   function degreeReview(answer) {
-    var prohibited = ["drop", "none", "didnt", "cannot"];
+    var prohibited = ["drop", "none", "didnt", "cannot", "second"];
     for (var i = 0; i < prohibited.length; i++) {
       if (answer.toLowerCase().indexOf(prohibited[i]) !== -1) {
         return "q-strong-no";
