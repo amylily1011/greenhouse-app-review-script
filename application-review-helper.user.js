@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Greenhouse application review helper
 // @namespace    https://canonical.com/
-// @version      0.0.3
+// @version      0.1.0
 // @description  Add's hints to application custom question answers
 // @author       Anthony Dillon
 // @icon         https://icons.duckduckgo.com/ip3/greenhouse.io.ico
@@ -124,16 +124,20 @@
       }
     }
     if (!isNaN(answer) && answer.startsWith("3")) {
-      if (answer > 3.8) {
-        return "q-strong-yes";
-      }
-      if (answer > 3.7) {
-        return "q-yes";
-      }
-      if (answer > 3.7) {
-        return "q-no-decision";
+      var result = GPACheck(answer);
+      if (result) {
+        return result;
       }
       return "q-strong-no";
+    }
+    if (answer.includes("GPA")) {
+      var splitBySpace = answer.split(" ");
+      var index = splitBySpace.indexOf("GPA");
+      var score = splitBySpace[index + 1];
+      var result = GPACheck(score);
+      if (result) {
+        return result;
+      }
     }
     if (answer.includes("/")) {
       const result = checkFractional(answer);
@@ -161,6 +165,20 @@
     }
 
     return "q-no-decision";
+  }
+
+  function GPACheck(answer) {
+    const point = parseInt(answer.replace("3.", ""));
+    if (point >= 8) {
+      return "q-strong-yes";
+    }
+    if (point >= 7) {
+      return "q-yes";
+    }
+    if (point >= 6) {
+      return "q-no";
+    }
+    return false;
   }
 
   function checkFractional(answer) {
