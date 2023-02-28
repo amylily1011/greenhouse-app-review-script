@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Greenhouse application review helper
 // @namespace    https://canonical.com/
-// @version      0.0.1
+// @version      0.0.2
 // @description  Add's hints to application custom question answers
 // @author       Anthony Dillon
 // @icon         https://icons.duckduckgo.com/ip3/greenhouse.io.ico
@@ -195,7 +195,7 @@
     if (answer === "Top 20%" || answer === "Top 50%") {
       return "q-no";
     }
-    if (answer === "Cannot recall") {
+    if (answer === "Cannot recall" || answer === "Not a strength") {
       return "q-strong-no";
     }
     return "q-no-decision";
