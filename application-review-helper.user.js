@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Greenhouse application review helper
+// @name         Greenhouse Application Review Helper
 // @namespace    https://canonical.com/
-// @version      0.1.1
+// @version      0.1.2
 // @description  Add's hints to application custom question answers
 // @author       Anthony Dillon
 // @icon         https://icons.duckduckgo.com/ip3/greenhouse.io.ico
