@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Greenhouse Application Review Helper
 // @namespace    https://canonical.com/
-// @version      0.1.2
+// @version      0.1.3
 // @description  Add's hints to application custom question answers
 // @author       Anthony Dillon
 // @icon         https://icons.duckduckgo.com/ip3/greenhouse.io.ico
@@ -168,15 +168,17 @@
   }
 
   function GPACheck(answer) {
-    const point = parseInt(answer.replace("3.", ""));
-    if (point >= 8) {
-      return "q-strong-yes";
-    }
-    if (point >= 7) {
-      return "q-yes";
-    }
-    if (point >= 6) {
-      return "q-no";
+    if (!isNaN(answer)) {
+      const point = parseInt(answer.replace("3.", ""));
+      if (point >= 8) {
+        return "q-strong-yes";
+      }
+      if (point >= 7) {
+        return "q-yes";
+      }
+      if (point >= 6) {
+        return "q-no";
+      }
     }
     return false;
   }
