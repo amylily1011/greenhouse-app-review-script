@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Greenhouse application review helper
 // @namespace    https://canonical.com/
-// @version      0.0.2
+// @version      0.0.3
 // @description  Add's hints to application custom question answers
 // @author       Anthony Dillon
 // @icon         https://icons.duckduckgo.com/ip3/greenhouse.io.ico
@@ -154,7 +154,8 @@
       answer === "90%" ||
       answer === "0" ||
       answer === "100%" ||
-      answer.toLowerCase() === "first"
+      answer.toLowerCase() === "first" ||
+      answer.toLowerCase() === "first class"
     ) {
       return "q-strong-yes";
     }
