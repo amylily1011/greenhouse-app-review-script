@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Greenhouse Application Review Helper
 // @namespace    https://canonical.com/
-// @version      0.1.3
+// @version      0.1.4
 // @description  Add's hints to application custom question answers
 // @author       Anthony Dillon
 // @icon         https://icons.duckduckgo.com/ip3/greenhouse.io.ico
@@ -169,7 +169,7 @@
 
   function GPACheck(answer) {
     if (!isNaN(answer)) {
-      const point = parseInt(answer.replace("3.", ""));
+      const point = parseInt(answer.replace("3.", "")[0]);
       if (point >= 8) {
         return "q-strong-yes";
       }
