@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Greenhouse Application Review Helper
 // @namespace    https://canonical.com/
-// @version      0.1.4
+// @version      0.1.5
 // @description  Add's hints to application custom question answers
 // @author       Anthony Dillon
 // @icon         https://icons.duckduckgo.com/ip3/greenhouse.io.ico
@@ -117,7 +117,7 @@
   }
 
   function degreeReview(answer) {
-    var prohibited = ["drop", "none", "didnt", "cannot", "second"];
+    var prohibited = ["drop", "none", "didnt", "cannot", "second", "n/a"];
     for (var i = 0; i < prohibited.length; i++) {
       if (answer.toLowerCase().indexOf(prohibited[i]) !== -1) {
         return "q-strong-no";
@@ -170,7 +170,7 @@
   function GPACheck(answer) {
     if (!isNaN(answer)) {
       const point = parseInt(answer.replace("3.", "")[0]);
-      if (point >= 8) {
+      if (point >= 8 || answer === "4.0") {
         return "q-strong-yes";
       }
       if (point >= 7) {
