@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Greenhouse Application Review Helper
 // @namespace    https://canonical.com/
-// @version      0.1.5
+// @version      0.1.6
 // @description  Add's hints to application custom question answers
 // @author       Anthony Dillon
 // @icon         https://icons.duckduckgo.com/ip3/greenhouse.io.ico
@@ -134,9 +134,9 @@
       var splitBySpace = answer.split(" ");
       var index = splitBySpace.indexOf("GPA");
       var score = splitBySpace[index + 1];
-      var result = GPACheck(score);
-      if (result) {
-        return result;
+      var GPACheckResult = GPACheck(score);
+      if (GPACheckResult) {
+        return GPACheckResult;
       }
     }
     if (answer.includes("/")) {
@@ -146,6 +146,12 @@
       }
     }
     if (answer === "-" || answer === "--") {
+      return "q-strong-no";
+    }
+    if (answer === "2:1") {
+      return "q-no";
+    }
+    if (answer === "2:2") {
       return "q-strong-no";
     }
     if (answer.endsWith("%")) {
@@ -168,7 +174,7 @@
   }
 
   function GPACheck(answer) {
-    if (!isNaN(answer)) {
+    if (!isNaN(answer) && answer.startsWith("3.")) {
       const point = parseInt(answer.replace("3.", "")[0]);
       if (point >= 8 || answer === "4.0") {
         return "q-strong-yes";
@@ -180,27 +186,36 @@
         return "q-no";
       }
     }
+
+    if (
+      !isNaN(answer) &&
+      (answer.startsWith("2.") || answer.startsWith("3."))
+    ) {
+      return "q-strong-no";
+    }
     return false;
   }
 
   function checkFractional(answer) {
-    const split = answer.split("/");
+    const splitBySpace = answer.split(" ");
+    const fraction = splitBySpace.find((part) => part.includes("/"));
+    const split = fraction.split("/");
     if (split.length === 2) {
       if (!isNaN(split[0]) && !isNaN(split[1])) {
         let percent = (split[0] / split[1]) * 100;
-        percentToResult(percent);
+        return percentToResult(percent);
       }
     }
   }
 
   function percentToResult(percent) {
-    if (percent > 90) {
+    if (parseInt(percent) > 90) {
       return "q-strong-yes";
     }
-    if (percent > 80) {
+    if (parseInt(percent) > 80) {
       return "q-yes";
     }
-    if (percent > 65) {
+    if (parseInt(percent) > 65) {
       return "q-no";
     }
     return "q-strong-no";
