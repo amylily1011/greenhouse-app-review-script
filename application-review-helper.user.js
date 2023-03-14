@@ -67,10 +67,13 @@
         const answer = question.querySelector("p").innerText;
         clearClass(question);
         switch (questionText) {
-          case "Describe your experience using or contributing to open source software":
+          case "Describe your most complex web design project.":
             question.classList.add(textReview(answer));
             break;
-          case "Describe your experience with JavaScript, TypeScript and SCSS":
+          case "Which new design patterns have you embraced, and which have you discarded, in the past year?":
+            question.classList.add(textReview(answer));
+            break;
+          case "Which companies do you think are innovating best in web design and design practices?":
             question.classList.add(textReview(answer));
             break;
           case "Are you due to graduate soon, or have you graduated from university in the past two years?":
@@ -179,10 +182,10 @@
       if (point >= 8 || answer === "4.0") {
         return "q-strong-yes";
       }
-      if (point >= 7) {
+      if (point >= 4) {
         return "q-yes";
       }
-      if (point >= 6) {
+      if (point >= 2) {
         return "q-no";
       }
     }
@@ -225,10 +228,10 @@
     if (answer === "Top student") {
       return "q-strong-yes";
     }
-    if (answer === "Top 5%" || answer === "Top 10%") {
+    if (answer === "Top 5%" || answer === "Top 10%" || answer === "Top 20%") {
       return "q-yes";
     }
-    if (answer === "Top 20%" || answer === "Top 50%") {
+    if (answer === "Top 50%") {
       return "q-no";
     }
     if (answer === "Cannot recall" || answer === "Not a strength") {
